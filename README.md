@@ -16,19 +16,19 @@ cp icon.svg ~/.local/share/icons/hicolor/scalable/apps/org.cesar.iaquota.svg
 kbuildsycoca6
 ```
 
-Then right-click the desktop → *Add to panel* → **IA Quota**.
+Then right-click the desktop → _Add to panel_ → **IA Quota**.
 
 ## Setup
 
-Right-click the widget → *Configure widget* and paste your keys:
+Right-click the widget → _Configure widget_ and paste your keys:
 
 ![Settings](configuraciones.png)
 
 - **OpenCode Go / DeepSeek / OpenAI / Anthropic**: your API key.
 - **QwenCloud**: your session cookie. In Firefox, open
-  `home.qwencloud.com`, press F12 → *Network* tab, reload,
-  pick the main request → *Headers* → right-click
-  `Cookie` → *Copy value* and paste it in the field.
+  `home.qwencloud.com`, press F12 → _Network_ tab, reload,
+  pick the main request → _Headers_ → right-click
+  `Cookie` → _Copy value_ and paste it in the field.
 
 ![Where to copy the cookie](cookieQwenCloud.png)
 
@@ -36,7 +36,7 @@ Without credentials the widget just asks you to configure them.
 The background follows the standard Plasma toggle (edit mode),
 and the text adapts on its own.
 
-*Versión en español: [README.es.md](README.es.md)*
+_Versión en español: [README.es.md](README.es.md)_
 
 ## Author
 

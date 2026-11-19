@@ -601,8 +601,8 @@ def fetch_deepseek(
     except urllib.error.HTTPError as exc:
         if exc.code in (401, 403):
             return {"error": "auth-expired"}
-        return {"error": "http-%d" % exc.code}
-    except Exception as exc:  # noqa: BLE001
+        return {"error": f"http-{exc.code}"}
+    except Exception:  # noqa: BLE001
         return {"error": "network-error"}
 
     try:
@@ -701,7 +701,7 @@ def fetch_anthropic(api_key: str, context, timeout: float) -> dict | None:
             }
     except urllib.error.HTTPError as exc:
         if exc.code not in (400, 401, 403, 404):
-            return {"error": "http-%d" % exc.code}
+            return {"error": f"http-{exc.code}"}
     except Exception:  # noqa: BLE001
         return {"error": "network-error"}
 
@@ -711,7 +711,7 @@ def fetch_anthropic(api_key: str, context, timeout: float) -> dict | None:
     except urllib.error.HTTPError as exc:
         if exc.code in (401, 403):
             return {"error": "auth-expired"}
-        return {"error": "http-%d" % exc.code}
+        return {"error": f"http-{exc.code}"}
     except Exception:  # noqa: BLE001
         return {"error": "network-error"}
     try:
@@ -766,7 +766,7 @@ def fetch_openai(api_key: str, context, timeout: float) -> dict | None:
         }
     except urllib.error.HTTPError as exc:
         if exc.code not in (401, 403, 404):
-            return {"error": "http-%d" % exc.code}
+            return {"error": f"http-{exc.code}"}
     except Exception:  # noqa: BLE001
         return {"error": "network-error"}
 
@@ -776,7 +776,7 @@ def fetch_openai(api_key: str, context, timeout: float) -> dict | None:
     except urllib.error.HTTPError as exc:
         if exc.code in (401, 403):
             return {"error": "auth-expired"}
-        return {"error": "http-%d" % exc.code}
+        return {"error": f"http-{exc.code}"}
     except Exception:  # noqa: BLE001
         return {"error": "network-error"}
     try:

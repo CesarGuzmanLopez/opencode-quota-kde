@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import org.kde.plasma.components as PlasmaComponents3
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents3
 
 // Raíz ColumnLayout: en modo barra muestra una fila (etiquetas + barra),
 // en modo círculo muestra una columna centrada (círculo + reset debajo).
@@ -47,6 +47,7 @@ ColumnLayout {
                 elide: Text.ElideRight
                 Layout.fillWidth: true
             }
+
             PlasmaComponents3.Label {
                 visible: metric.rst !== ""
                 text: metric.rst
@@ -58,6 +59,7 @@ ColumnLayout {
                 elide: Text.ElideRight
                 Layout.fillWidth: true
             }
+
         }
 
         Rectangle {
@@ -68,13 +70,16 @@ ColumnLayout {
             radius: height / 2
             clip: true
             color: Qt.rgba(metric.colorTrack.r, metric.colorTrack.g, metric.colorTrack.b, 0.3)
+
             Rectangle {
                 width: parent.width * Math.min(1, Math.max(0, metric.pct / 100))
                 height: parent.height
                 radius: height / 2
                 color: metric.colorTrack
             }
+
         }
+
     }
 
     // ---------- Modo círculo: columna centrada ----------
@@ -92,32 +97,32 @@ ColumnLayout {
 
             Canvas {
                 id: cv
+
                 anchors.fill: parent
                 onPaint: {
-                    var ctx = getContext("2d")
-                    if (!ctx) return
-                    ctx.reset()
-                    var cx = width / 2
-                    var cy = height / 2
-                    var lw = Math.max(2, Math.round(metric.diameter / 16))
-                    var r = Math.max(1, Math.min(width, height) / 2 - lw / 2 - 1)
+                    var ctx = getContext("2d");
+                    if (!ctx)
+                        return ;
 
+                    ctx.reset();
+                    var cx = width / 2;
+                    var cy = height / 2;
+                    var lw = Math.max(2, Math.round(metric.diameter / 16));
+                    var r = Math.max(1, Math.min(width, height) / 2 - lw / 2 - 1);
                     // pista de fondo
-                    ctx.lineWidth = lw
-                    ctx.strokeStyle = Qt.rgba(metric.colorTrack.r, metric.colorTrack.g, metric.colorTrack.b, 0.35)
-                    ctx.beginPath()
-                    ctx.arc(cx, cy, r, 0, Math.PI * 2)
-                    ctx.stroke()
-
+                    ctx.lineWidth = lw;
+                    ctx.strokeStyle = Qt.rgba(metric.colorTrack.r, metric.colorTrack.g, metric.colorTrack.b, 0.35);
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                    ctx.stroke();
                     // arco de valor
-                    var frac = Math.min(1, Math.max(0, metric.pct / 100))
+                    var frac = Math.min(1, Math.max(0, metric.pct / 100));
                     if (frac > 0) {
-                        ctx.strokeStyle = metric.colorValue
-                        ctx.lineCap = "round"
-                        ctx.beginPath()
-                        ctx.arc(cx, cy, r, -Math.PI / 2,
-                                -Math.PI / 2 + Math.PI * 2 * frac)
-                        ctx.stroke()
+                        ctx.strokeStyle = metric.colorValue;
+                        ctx.lineCap = "round";
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * frac);
+                        ctx.stroke();
                     }
                 }
                 Component.onCompleted: cv.requestPaint()
@@ -127,6 +132,7 @@ ColumnLayout {
             Column {
                 anchors.centerIn: parent
                 spacing: -1
+
                 PlasmaComponents3.Label {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: metric.lbl
@@ -136,6 +142,7 @@ ColumnLayout {
                     style: metric.flat ? Text.Outline : Text.Normal
                     styleColor: "#d0000000"
                 }
+
                 PlasmaComponents3.Label {
                     anchors.horizontalCenter: parent.horizontalCenter
                     visible: metric.showPercent
@@ -146,14 +153,27 @@ ColumnLayout {
                     style: metric.flat ? Text.Outline : Text.Normal
                     styleColor: "#d0000000"
                 }
+
             }
 
             Connections {
+                function onPctChanged() {
+                    cv.requestPaint();
+                }
+
+                function onDiameterChanged() {
+                    cv.requestPaint();
+                }
+
+                function onCircleChanged() {
+                    if (metric.circle)
+                        cv.requestPaint();
+
+                }
+
                 target: metric
-                function onPctChanged() { cv.requestPaint() }
-                function onDiameterChanged() { cv.requestPaint() }
-                function onCircleChanged() { if (metric.circle) cv.requestPaint() }
             }
+
         }
 
         // Reset debajo del círculo
@@ -167,5 +187,7 @@ ColumnLayout {
             styleColor: "#d0000000"
             Layout.alignment: Qt.AlignHCenter
         }
+
     }
+
 }
