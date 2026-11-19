@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>IA Quota</title>
+  <!-- Pista: círculo azul -->
+  <circle cx="32" cy="32" r="22" fill="none" stroke="#3DAEE9" stroke-width="9"/>
+  <!-- Valor: arco rosa ~140° con extremos redondos -->
+  <path d="M32,10 A22,22 0 0 1 46.14,48.85" fill="none" stroke="#E93DAE" stroke-width="9" stroke-linecap="round"/>
+</svg>

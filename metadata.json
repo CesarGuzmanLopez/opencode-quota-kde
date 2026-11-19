@@ -1,0 +1,29 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "dr@i-glu4it.ru",
+                "Name": "Cesar Guzman"
+            }
+        ],
+        "Category": "System",
+        "Description": "IA Cloud quotas",
+        "Description[es]": "Cuotas de IA en la nube",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "tablet",
+            "handset",
+            "desktop"
+        ],
+        "Icon": "org.cesar.iaquota",
+        "Id": "org.cesar.iaquota",
+        "License": "GPL-2.0+",
+        "Name": "IA Quota",
+        "Version": "1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.systemmonitor"
+    ]
+}

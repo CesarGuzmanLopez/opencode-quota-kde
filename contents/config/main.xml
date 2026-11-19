@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+    <group name="General">
+        <entry name="opencodeApiKey" type="String">
+            <default></default>
+        </entry>
+        <entry name="qwenCookie" type="String">
+            <default></default>
+        </entry>
+        <entry name="qwenSecToken" type="String">
+            <default></default>
+        </entry>
+        <entry name="deepseekApiKey" type="String">
+            <default></default>
+        </entry>
+        <entry name="deepseekBaseline" type="Double">
+            <default>10</default>
+        </entry>
+        <entry name="openaiApiKey" type="String">
+            <default></default>
+        </entry>
+        <entry name="showOpenai" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="anthropicApiKey" type="String">
+            <default></default>
+        </entry>
+        <entry name="showAnthropic" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="layoutMode" type="Int">
+            <default>0</default>
+        </entry>
+        <!-- Visualización -->
+        <entry name="displayMode" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="circleDiameter" type="Int">
+            <default>48</default>
+        </entry>
+        <entry name="circleColor" type="Color">
+            <default>#E93DAE</default>
+        </entry>
+        <entry name="trackColor" type="Color">
+            <default>#3DAEE9</default>
+        </entry>
+        <!-- Visibilidad -->
+        <entry name="showQwen" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showOpencode" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showDeepseek" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showOc5h" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showOcWeek" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showOcMonth" type="Bool">
+            <default>true</default>
+        </entry>
+    </group>
+</kcfg>
