@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: org.cesar.iaquota 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+msgid "   · 5h window"
+msgstr "   · Ventana 5h"
+
+msgid "   · Monthly"
+msgstr "   · Mensual"
+
+msgid "   · Weekly"
+msgstr "   · Semanal"
+
+msgid "%1 left"
+msgstr "%1 restante"
+
+msgid "%1d"
+msgstr "%1 d"
+
+msgid "5h"
+msgstr "5h"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Anthropic API Key:"
+msgstr "Clave API de Anthropic:"
+
+msgid "Appearance"
+msgstr "Apariencia"
+
+msgid "Auto-detected if left empty"
+msgstr "Se auto-detecta si se deja vacío"
+
+msgid "Automatic"
+msgstr "Automática"
+
+msgid "Available"
+msgstr "Disponible"
+
+msgid "Balance"
+msgstr "Balance"
+
+msgid "Balance $%1 of $%2 · used $%3"
+msgstr "Saldo $%1 de $%2 · usado $%3"
+
+msgid "Balance %1 · target $%2 · %3"
+msgstr "Saldo %1 · objetivo $%2 · %3"
+
+msgid "Bars"
+msgstr "Barras"
+
+msgid "Base circle size:"
+msgstr "Tamaño base de círculo:"
+
+msgid "Circles"
+msgstr "Círculos"
+
+msgid "Configure your credentials to see the quota"
+msgstr "Configura tus credenciales para ver la cuota"
+
+msgid "Data from %1"
+msgstr "Datos de hace %1"
+
+msgid "DeepSeek"
+msgstr "DeepSeek"
+
+msgid "DeepSeek API Key:"
+msgstr "Clave API de DeepSeek:"
+
+msgid "Error reading data"
+msgstr "Error al leer datos"
+
+msgid "Expires: %1 · Reset: %2"
+msgstr "Expira: %1 · Reset: %2"
+
+msgid "Free"
+msgstr "Libre"
+
+msgid "Free %1% · quota %2 · expires %3"
+msgstr "Libre %1% · cuota %2 · vence %3"
+
+msgid "Layout:"
+msgstr "Distribución:"
+
+msgid "Monthly"
+msgstr "Mensual"
+
+msgid "Monthly · used %1% · reset %2"
+msgstr "Mensual · usado %1% · reset %2"
+
+msgid "No backend response"
+msgstr "Sin respuesta del backend"
+
+msgid "Not available"
+msgstr "No disponible"
+
+msgid "OpenAI"
+msgstr "OpenAI"
+
+msgid "OpenAI API Key:"
+msgstr "Clave API de OpenAI:"
+
+msgid "OpenCode Go"
+msgstr "OpenCode Go"
+
+msgid "OpenCode Go API Key:"
+msgstr "Clave API de OpenCode Go:"
+
+msgid "OpenCode on the left"
+msgstr "OpenCode a la izquierda"
+
+msgid "Quota not public"
+msgstr "Cuota no pública"
+
+msgid "Qwen sec_token:"
+msgstr "Qwen sec_token:"
+
+msgid "QwenCloud"
+msgstr "QwenCloud"
+
+msgid "QwenCloud Cookie:"
+msgstr "Cookie de QwenCloud:"
+
+msgid "Refresh now"
+msgstr "Actualizar ahora"
+
+msgid "Show Anthropic"
+msgstr "Mostrar Anthropic"
+
+msgid "Show DeepSeek"
+msgstr "Mostrar DeepSeek"
+
+msgid "Show OpenAI"
+msgstr "Mostrar OpenAI"
+
+msgid "Show OpenCode Go"
+msgstr "Mostrar OpenCode Go"
+
+msgid "Show QwenCloud"
+msgstr "Mostrar QwenCloud"
+
+msgid "Spent this month"
+msgstr "Gasto del mes"
+
+msgid "Style:"
+msgstr "Estilo:"
+
+msgid "Target quota ($):"
+msgstr "Cuota objetivo ($):"
+
+msgid "Three in a row"
+msgstr "Tres en fila"
+
+msgid "Track color"
+msgstr "Color de pista"
+
+msgid "Track color:"
+msgstr "Color de pista:"
+
+msgid "Valid key · %1 models"
+msgstr "Key válida · %1 modelos"
+
+msgid "Value color"
+msgstr "Color de valor"
+
+msgid "Value color:"
+msgstr "Color de valor:"
+
+msgid "Weekly"
+msgstr "Semanal"
+
+msgid "Weekly · used %1% · reset %2"
+msgstr "Semanal · usado %1% · reset %2"
+
+msgid "Window 5h · used %1% · reset %2"
+msgstr "Ventana 5h · usado %1% · reset %2"
+
+msgid "of $%1"
+msgstr "de $%1"
+
+msgid "quota %1"
+msgstr "quota %1"
+
+msgid "reset %1"
+msgstr "reset %1"
+
+msgid "reset %1d"
+msgstr "reset %1 d"
+
+msgid "⭐ Give me a star on GitHub"
+msgstr "⭐ Dame una estrella en GitHub"
+
+msgid "%1 h ago"
+msgid_plural "%1 h ago"
+msgstr[0] "hace %1 hora"
+msgstr[1] "hace %1 horas"
+
+msgid "%1 min ago"
+msgid_plural "%1 min ago"
+msgstr[0] "hace %1 minuto"
+msgstr[1] "hace %1 minutos"
+
+msgid "%1d %2h"
+msgid_plural "%1d %2h"
+msgstr[0] "%1d %2h"
+msgstr[1] "%1d %2h"
+
+msgid "%1h %2m"
+msgid_plural "%1h %2m"
+msgstr[0] "%1h %2m"
+msgstr[1] "%1h %2m"
+
+msgid "%1m"
+msgid_plural "%1m"
+msgstr[0] "%1m"
+msgstr[1] "%1m"

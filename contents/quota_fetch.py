@@ -27,6 +27,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, wait
 from datetime import UTC, datetime
 from typing import Any
 
@@ -822,6 +823,30 @@ def _read_config(path: str) -> dict:
 def _resolve_credentials(args, config: dict) -> dict:
     """Command-line values (when supplied) override config-file values."""
     result = dict(config)
+    # Credentials passed as a hex-encoded UTF-8 JSON blob: keeps secrets out of
+    # the process arguments (no plaintext in `ps`) and needs no shell quoting.
+    if getattr(args, "creds_hex", None):
+        try:
+            blob = json.loads(bytes.fromhex(args.creds_hex).decode("utf-8"))
+        except (ValueError, UnicodeDecodeError):
+            blob = {}
+        if isinstance(blob, dict):
+            for source, target in (
+                ("opencode_api_key", "opencode_api_key"),
+                ("qwen_cookie", "qwen_cookie"),
+                ("qwen_sec_token", "qwen_sec_token"),
+                ("deepseek_api_key", "deepseek_api_key"),
+                ("deepseek_baseline", "deepseek_baseline"),
+                ("openai_api_key", "openai_api_key"),
+                ("anthropic_api_key", "anthropic_api_key"),
+            ):
+                if source in blob:
+                    value = blob[source]
+                    result[target] = (
+                        _num(value) or 0.0
+                        if target == "deepseek_baseline"
+                        else _text(value)
+                    )
     for option, target in (
         ("opencode_key", "opencode_api_key"),
         ("qwen_cookie", "qwen_cookie"),
@@ -892,6 +917,11 @@ def main(argv=None) -> int:
         help="API key de Anthropic (precede al config)",
     )
     parser.add_argument(
+        "--creds-hex",
+        default=None,
+        help="Credenciales en JSON UTF-8 codificado en hexadecimal (evita argv en claro)",
+    )
+    parser.add_argument(
         "--config", default=DEFAULT_CONFIG, help="Ruta del JSON de configuracion"
     )
     parser.add_argument(
@@ -912,31 +942,63 @@ def main(argv=None) -> int:
     except Exception:  # noqa: BLE001
         context = None
 
-    payload = {
-        "updated_at": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
-        "opencode": fetch_opencode(
+    baseline = (
+        args.deepseek_baseline
+        or credentials.get("deepseek_baseline")
+        or DEEPSEEK_BASELINE_USD
+    )
+
+    jobs = {
+        "opencode": lambda: fetch_opencode(
             credentials["opencode_api_key"], now, context, args.timeout
         ),
-        "qwen": fetch_qwen(
+        "qwen": lambda: fetch_qwen(
             credentials["qwen_cookie"],
             credentials["qwen_sec_token"],
             now,
             context,
             args.timeout,
         ),
-        "deepseek": fetch_deepseek(
-            credentials["deepseek_api_key"],
-            context,
-            args.timeout,
-            args.deepseek_baseline
-            or credentials.get("deepseek_baseline")
-            or DEEPSEEK_BASELINE_USD,
+        "deepseek": lambda: fetch_deepseek(
+            credentials["deepseek_api_key"], context, args.timeout, baseline
         ),
-        "openai": fetch_openai(credentials["openai_api_key"], context, args.timeout),
-        "anthropic": fetch_anthropic(
+        "openai": lambda: fetch_openai(
+            credentials["openai_api_key"], context, args.timeout
+        ),
+        "anthropic": lambda: fetch_anthropic(
             credentials["anthropic_api_key"], context, args.timeout
         ),
     }
+
+    def _run(name, worker):
+        try:
+            return name, worker()
+        except Exception:  # noqa: BLE001
+            return name, {"error": "internal-error"}
+
+    # Global guard: never outlive the widget's expectations. Without it a hung
+    # socket would keep the executable engine busy and block later refreshes.
+    hard_limit = float(min(120, max(15, args.timeout * 6)))
+
+    payload = {"updated_at": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")}
+    pool = ThreadPoolExecutor(max_workers=len(jobs))
+    futures = {
+        pool.submit(_run, name, worker): name for name, worker in sorted(jobs.items())
+    }
+    done, pending = wait(futures, timeout=hard_limit)
+    pool.shutdown(wait=False, cancel_futures=True)
+
+    for future in done:
+        name, value = future.result()
+        payload[name] = value
+
+    if pending:
+        # A worker is stuck: its thread would keep the interpreter alive at exit.
+        for future in pending:
+            payload[futures[future]] = {"error": "timeout"}
+        _write_output(args.output, payload)
+        os._exit(1)
+
     return 0 if _write_output(args.output, payload) else 1
 
 

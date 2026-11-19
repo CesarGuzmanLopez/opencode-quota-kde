@@ -232,9 +232,9 @@ KCM.SimpleKCM {
 
         Controls.Button {
             icon.name: "emblem-favorite"
-            text: i18n("⭐ Give me a star on GitHub")
+            text: i18n("⭐ Star on GitHub")
             Layout.fillWidth: true
-            onClicked: Qt.openUrlExternally("https://github.com/CesarGuzmanLopez/ia-quota-widget")
+            onClicked: Qt.openUrlExternally("https://github.com/CesarGuzmanLopez/opencode-quota-kde")
         }
 
     }

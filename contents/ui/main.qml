@@ -38,11 +38,16 @@ PlasmoidItem {
     readonly property bool showOpenai: plasmoid.configuration.showOpenai !== false
     readonly property bool showAnthropic: plasmoid.configuration.showAnthropic !== false
     // Acceso seguro (objeto vacío cuando el proveedor es null: evita TypeError)
-    readonly property var oai: (quotaData && quotaData.openai) ? quotaData.openai : ({})
-    readonly property var ant: (quotaData && quotaData.anthropic) ? quotaData.anthropic : ({})
-    readonly property var oc: (quotaData && quotaData.opencode) ? quotaData.opencode : ({})
-    readonly property var qw: (quotaData && quotaData.qwen) ? quotaData.qwen : ({})
-    readonly property var ds: (quotaData && quotaData.deepseek) ? quotaData.deepseek : ({})
+    readonly property var oai: (quotaData && quotaData.openai) ? quotaData.openai : ({
+    })
+    readonly property var ant: (quotaData && quotaData.anthropic) ? quotaData.anthropic : ({
+    })
+    readonly property var oc: (quotaData && quotaData.opencode) ? quotaData.opencode : ({
+    })
+    readonly property var qw: (quotaData && quotaData.qwen) ? quotaData.qwen : ({
+    })
+    readonly property var ds: (quotaData && quotaData.deepseek) ? quotaData.deepseek : ({
+    })
     readonly property bool showOc5h: plasmoid.configuration.showOc5h !== false
     readonly property bool showOcWeek: plasmoid.configuration.showOcWeek !== false
     readonly property bool showOcMonth: plasmoid.configuration.showOcMonth !== false
@@ -53,6 +58,25 @@ PlasmoidItem {
     readonly property color colSub: flat ? "#f5f5f5" : Kirigami.Theme.disabledTextColor
     readonly property color circleColor: plasmoid.configuration.circleColor ?? "#E93DAE"
     readonly property color trackColor: plasmoid.configuration.trackColor ?? "#3DAEE9"
+    // Identidad de marca por proveedor (los arcos usan los colores configurables)
+    readonly property color accOc: "#3DAEE9"
+    readonly property color accQwen: "#6172F3"
+    readonly property color accDs: "#4D6BFE"
+    readonly property color accOai: "#10A37F"
+    readonly property color accAnt: "#D97757"
+    // Datos envejecidos: el backend no respondió hace demasiado
+    readonly property int staleMinutes: {
+        if (!quotaData || !quotaData.updated_at)
+            return -1;
+
+        var t = Date.parse(String(quotaData.updated_at).replace(" ", "T"));
+        if (isNaN(t))
+            return -1;
+
+        return Math.floor((Date.now() - t) / 60000);
+    }
+    readonly property bool stale: staleMinutes > 12
+    readonly property string ageText: staleMinutes < 0 ? "" : (staleMinutes < 60 ? i18np("%1 min ago", "%1 min ago", staleMinutes) : i18np("%1 h ago", "%1 h ago", Math.floor(staleMinutes / 60)))
     // Refrescar al cambiar la configuración (hash de propiedades)
     property string _cfgHash: [plasmoid.configuration.opencodeApiKey, plasmoid.configuration.qwenCookie, plasmoid.configuration.qwenSecToken, plasmoid.configuration.deepseekApiKey, plasmoid.configuration.deepseekBaseline, plasmoid.configuration.openaiApiKey, plasmoid.configuration.anthropicApiKey, plasmoid.configuration.displayMode, plasmoid.configuration.layoutMode, plasmoid.configuration.circleDiameter, plasmoid.configuration.circleColor, plasmoid.configuration.trackColor, plasmoid.configuration.showQwen, plasmoid.configuration.showOpencode, plasmoid.configuration.showDeepseek, plasmoid.configuration.showOpenai, plasmoid.configuration.showAnthropic, plasmoid.configuration.showOc5h, plasmoid.configuration.showOcWeek, plasmoid.configuration.showOcMonth].join("\u0001")
 
@@ -76,34 +100,70 @@ PlasmoidItem {
 
     // Días restantes (para el título, en la misma línea: no alarga el widget)
     function daysFromSec(sec) {
-        if (typeof sec !== "number" || !isFinite(sec) || sec <= 0) return ""
-        return Math.ceil(sec / 86400)
+        if (typeof sec !== "number" || !isFinite(sec) || sec <= 0)
+            return "";
+
+        return Math.ceil(sec / 86400);
     }
+
     function daysFromDate(text) {
-        if (!text) return ""
-        var t = Date.parse(String(text).replace(" ", "T"))
-        if (isNaN(t)) return ""
-        var d = Math.ceil((t - Date.now()) / 86400000)
-        return d > 0 ? d : ""
+        if (!text)
+            return "";
+
+        var t = Date.parse(String(text).replace(" ", "T"));
+        if (isNaN(t))
+            return "";
+
+        var d = Math.ceil((t - Date.now()) / 8.64e+07);
+        return d > 0 ? d : "";
     }
+
     function headerSuffix(days) {
-        return days ? " · " + i18n("%1d", days) : ""
+        return days ? " · " + i18n("reset %1d", days) : "";
     }
+
     function esc(s) {
         return String(s || "").replace(/'/g, "'\\''");
     }
 
+    // Codifica UTF-8 a hex: las credenciales viajan sin texto en claro por argv
+    // y sin caracteres especiales de shell (solo [0-9a-f]).
+    function hex2(n) {
+        var h = n.toString(16);
+        return h.length < 2 ? "0" + h : h;
+    }
+
+    function utf8Hex(str) {
+        var out = "";
+        for (var i = 0; i < str.length; ++i) {
+            var c = str.charCodeAt(i);
+            if (c < 128) {
+                out += hex2(c);
+            } else if (c < 2048) {
+                out += hex2(192 | (c >> 6)) + hex2(128 | (c & 63));
+            } else if (c >= 55296 && c <= 56319 && i + 1 < str.length) {
+                var cp = 65536 + ((c - 55296) << 10) + (str.charCodeAt(++i) - 56320);
+                out += hex2(240 | (cp >> 18)) + hex2(128 | ((cp >> 12) & 63)) + hex2(128 | ((cp >> 6) & 63)) + hex2(128 | (cp & 63));
+            } else {
+                out += hex2(224 | (c >> 12)) + hex2(128 | ((c >> 6) & 63)) + hex2(128 | (c & 63));
+            }
+        }
+        return out;
+    }
+
     // === Backend ===
     function refresh() {
-        var key = esc(plasmoid.configuration.opencodeApiKey);
-        var cookie = esc(plasmoid.configuration.qwenCookie);
-        var token = esc(plasmoid.configuration.qwenSecToken);
-        var dsKey = esc(plasmoid.configuration.deepseekApiKey);
-        var dsBase = Number(plasmoid.configuration.deepseekBaseline) || 10;
-        var oaiKey = esc(plasmoid.configuration.openaiApiKey);
-        var antKey = esc(plasmoid.configuration.anthropicApiKey);
+        var creds = JSON.stringify({
+            "opencode_api_key": plasmoid.configuration.opencodeApiKey || "",
+            "qwen_cookie": plasmoid.configuration.qwenCookie || "",
+            "qwen_sec_token": plasmoid.configuration.qwenSecToken || "",
+            "deepseek_api_key": plasmoid.configuration.deepseekApiKey || "",
+            "deepseek_baseline": Number(plasmoid.configuration.deepseekBaseline) || 10,
+            "openai_api_key": plasmoid.configuration.openaiApiKey || "",
+            "anthropic_api_key": plasmoid.configuration.anthropicApiKey || ""
+        });
         var script = Qt.resolvedUrl("../quota_fetch.py").toString().replace("file://", "");
-        var cmd = "python3 '" + script + "' --opencode-key '" + key + "' --qwen-cookie '" + cookie + "' --qwen-sec-token '" + token + "' --deepseek-key '" + dsKey + "' --deepseek-baseline " + dsBase + " --openai-key '" + oaiKey + "' --anthropic-key '" + antKey + "' >/dev/null 2>&1; cat /tmp/opencode/ia-quota.json 2>/dev/null";
+        var cmd = "python3 '" + script + "' --creds-hex " + utf8Hex(creds) + " >/dev/null 2>&1; cat /tmp/opencode/ia-quota.json 2>/dev/null";
         dataSource.exec(cmd);
     }
 
@@ -200,15 +260,14 @@ PlasmoidItem {
                     Layout.columnSpan: root.ocSpan
                     Layout.rowSpan: root.lateral ? 2 : 1
 
-                    PlasmaComponents3.Label {
-                        text: i18n("OpenCode Go") + root.headerSuffix(root.daysFromSec(root.oc.monthly ? root.oc.monthly.reset_in_sec : 0))
-                        font.bold: true
-                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
-                        color: root.colMain
-                        style: root.flat ? Text.Outline : Text.Normal
-                        styleColor: "#d0000000"
-                        Layout.fillWidth: true
-                        horizontalAlignment: Text.AlignHCenter
+                    ProviderHeader {
+                        badge: "OC"
+                        accent: root.accOc
+                        title: i18n("OpenCode Go")
+                        suffix: root.headerSuffix(root.daysFromSec(root.oc.monthly ? root.oc.monthly.reset_in_sec : 0))
+                        flat: root.flat
+                        textColor: root.colMain
+                        Layout.alignment: Qt.AlignHCenter
                     }
 
                     GridLayout {
@@ -222,6 +281,7 @@ PlasmoidItem {
                             visible: root.showOc5h && !!root.oc.rolling
                             flat: root.flat
                             lbl: i18n("5h")
+                            stale: root.stale
                             pct: (root.oc.rolling && root.oc.rolling.percent) || 0
                             rst: i18n("reset %1", resetStr(root.oc.rolling ? root.oc.rolling.reset_in_sec : 0))
                             circle: root.circleMode
@@ -235,6 +295,7 @@ PlasmoidItem {
                             visible: root.showOcWeek && !!root.oc.weekly
                             flat: root.flat
                             lbl: i18n("Weekly")
+                            stale: root.stale
                             pct: (root.oc.weekly && root.oc.weekly.percent) || 0
                             rst: i18n("reset %1", resetStr(root.oc.weekly ? root.oc.weekly.reset_in_sec : 0))
                             circle: root.circleMode
@@ -248,6 +309,7 @@ PlasmoidItem {
                             visible: root.showOcMonth && !!root.oc.monthly
                             flat: root.flat
                             lbl: i18n("Monthly")
+                            stale: root.stale
                             pct: (root.oc.monthly && root.oc.monthly.percent) || 0
                             rst: i18n("reset %1", resetStr(root.oc.monthly ? root.oc.monthly.reset_in_sec : 0))
                             circle: root.circleMode
@@ -275,20 +337,21 @@ PlasmoidItem {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
-                    PlasmaComponents3.Label {
-                        text: i18n("QwenCloud") + (root.qw.plan ? " · " + root.qw.plan : "") + root.headerSuffix(root.daysFromDate(root.qw.reset))
-                        font.bold: true
-                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
-                        color: root.colMain
-                        style: root.flat ? Text.Outline : Text.Normal
-                        styleColor: "#d0000000"
-                        Layout.fillWidth: true
-                        horizontalAlignment: Text.AlignHCenter
+                    ProviderHeader {
+                        badge: "Q"
+                        accent: root.accQwen
+                        title: i18n("QwenCloud") + (root.qw.plan ? " · " + root.qw.plan : "")
+                        suffix: root.headerSuffix(root.daysFromDate(root.qw.reset))
+                        flat: root.flat
+                        textColor: root.colMain
+                        Layout.alignment: Qt.AlignHCenter
                     }
 
                     MetricDisplay {
                         flat: root.flat
                         lbl: i18n("Free")
+                        remaining: true
+                        stale: root.stale
                         pct: root.qw.remaining_pct || 0
                         rst: i18n("quota %1", root.qw.plan_quota || "–")
                         circle: root.circleMode
@@ -320,21 +383,22 @@ PlasmoidItem {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
-                    PlasmaComponents3.Label {
-                        text: i18n("DeepSeek") + (root.ds.currency ? " · " + root.ds.currency : "") + (root.ds.total_balance != null ? " " + root.ds.total_balance : "")
-                        font.bold: true
-                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
-                        color: root.colMain
-                        style: root.flat ? Text.Outline : Text.Normal
-                        styleColor: "#d0000000"
-                        Layout.fillWidth: true
-                        horizontalAlignment: Text.AlignHCenter
+                    ProviderHeader {
+                        badge: "DS"
+                        accent: root.accDs
+                        title: i18n("DeepSeek") + (root.ds.total_balance != null ? " · " + (root.ds.currency || "") + " " + root.ds.total_balance : "")
+                        suffix: ""
+                        flat: root.flat
+                        textColor: root.colMain
+                        Layout.alignment: Qt.AlignHCenter
                     }
 
                     MetricDisplay {
                         flat: root.flat
                         visible: root.ds.percent !== null
                         lbl: i18n("Balance")
+                        remaining: true
+                        stale: root.stale
                         pct: root.ds.percent || 0
                         rst: i18n("of $%1", root.ds.baseline)
                         circle: root.circleMode
@@ -365,21 +429,22 @@ PlasmoidItem {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
-                    PlasmaComponents3.Label {
-                        text: i18n("OpenAI") + (root.oai.total_available != null ? " · $" + root.oai.total_available : "")
-                        font.bold: true
-                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
-                        color: root.colMain
-                        style: root.flat ? Text.Outline : Text.Normal
-                        styleColor: "#d0000000"
-                        Layout.fillWidth: true
-                        horizontalAlignment: Text.AlignHCenter
+                    ProviderHeader {
+                        badge: "AI"
+                        accent: root.accOai
+                        title: i18n("OpenAI") + (root.oai.total_available != null ? " · $" + root.oai.total_available : "")
+                        suffix: ""
+                        flat: root.flat
+                        textColor: root.colMain
+                        Layout.alignment: Qt.AlignHCenter
                     }
 
                     MetricDisplay {
                         flat: root.flat
                         visible: root.oai.percent !== null && root.oai.percent !== undefined
                         lbl: i18n("Balance")
+                        remaining: true
+                        stale: root.stale
                         pct: root.oai.percent || 0
                         rst: i18n("of $%1", root.oai.baseline)
                         circle: root.circleMode
@@ -423,15 +488,14 @@ PlasmoidItem {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
-                    PlasmaComponents3.Label {
-                        text: i18n("Anthropic") + (root.ant.spent_month != null ? " · " + (root.ant.currency || "") + " " + root.ant.spent_month : "")
-                        font.bold: true
-                        font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
-                        color: root.colMain
-                        style: root.flat ? Text.Outline : Text.Normal
-                        styleColor: "#d0000000"
-                        Layout.fillWidth: true
-                        horizontalAlignment: Text.AlignHCenter
+                    ProviderHeader {
+                        badge: "An"
+                        accent: root.accAnt
+                        title: i18n("Anthropic") + (root.ant.spent_month != null ? " · " + (root.ant.currency || "") + " " + root.ant.spent_month : "")
+                        suffix: ""
+                        flat: root.flat
+                        textColor: root.colMain
+                        Layout.alignment: Qt.AlignHCenter
                     }
 
                     PlasmaComponents3.Label {
@@ -472,6 +536,19 @@ PlasmoidItem {
 
                 }
 
+            }
+
+            // Aviso de datos envejecidos
+            PlasmaComponents3.Label {
+                visible: root.quotaData && root.stale
+                text: "⚠ " + i18n("Data from %1", root.ageText)
+                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                font.bold: true
+                color: Kirigami.Theme.neutralTextColor
+                style: root.flat ? Text.Outline : Text.Normal
+                styleColor: "#d0000000"
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
             }
 
             // Errores

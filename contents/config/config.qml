@@ -7,4 +7,5 @@ ConfigModel {
         icon: "preferences-system"
         source: "config/ConfigGeneral.qml"
     }
+
 }

@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: org.cesar.iaquota 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+msgid "   · 5h window"
+msgstr "   · Fenêtre 5h"
+
+msgid "   · Monthly"
+msgstr "   · Mensuel"
+
+msgid "   · Weekly"
+msgstr "   · Hebdomadaire"
+
+msgid "%1 left"
+msgstr "%1 restant"
+
+msgid "%1d"
+msgstr "%1 j"
+
+msgid "5h"
+msgstr "5h"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Anthropic API Key:"
+msgstr "Clé API Anthropic :"
+
+msgid "Appearance"
+msgstr "Apparence"
+
+msgid "Auto-detected if left empty"
+msgstr "Détecté automatiquement si vide"
+
+msgid "Automatic"
+msgstr "Automatique"
+
+msgid "Available"
+msgstr "Disponible"
+
+msgid "Balance"
+msgstr "Solde"
+
+msgid "Balance $%1 of $%2 · used $%3"
+msgstr "Solde $%1 sur $%2 · utilisé $%3"
+
+msgid "Balance %1 · target $%2 · %3"
+msgstr "Solde %1 · objectif $%2 · %3"
+
+msgid "Bars"
+msgstr "Barres"
+
+msgid "Base circle size:"
+msgstr "Taille de base des cercles :"
+
+msgid "Circles"
+msgstr "Cercles"
+
+msgid "Configure your credentials to see the quota"
+msgstr "Configurez vos identifiants pour voir le quota"
+
+msgid "Data from %1"
+msgstr "Données de %1"
+
+msgid "DeepSeek"
+msgstr "DeepSeek"
+
+msgid "DeepSeek API Key:"
+msgstr "Clé API DeepSeek :"
+
+msgid "Error reading data"
+msgstr "Erreur de lecture des données"
+
+msgid "Expires: %1 · Reset: %2"
+msgstr "Expire : %1 · Réinitialisation : %2"
+
+msgid "Free"
+msgstr "Libre"
+
+msgid "Free %1% · quota %2 · expires %3"
+msgstr "Libre %1 % · quota %2 · expire %3"
+
+msgid "Layout:"
+msgstr "Disposition :"
+
+msgid "Monthly"
+msgstr "Mensuel"
+
+msgid "Monthly · used %1% · reset %2"
+msgstr "Mensuel · utilisé %1 % · reset %2"
+
+msgid "No backend response"
+msgstr "Pas de réponse du backend"
+
+msgid "Not available"
+msgstr "Non disponible"
+
+msgid "OpenAI"
+msgstr "OpenAI"
+
+msgid "OpenAI API Key:"
+msgstr "Clé API OpenAI :"
+
+msgid "OpenCode Go"
+msgstr "OpenCode Go"
+
+msgid "OpenCode Go API Key:"
+msgstr "Clé API OpenCode Go :"
+
+msgid "OpenCode on the left"
+msgstr "OpenCode à gauche"
+
+msgid "Quota not public"
+msgstr "Quota non public"
+
+msgid "Qwen sec_token:"
+msgstr "Qwen sec_token :"
+
+msgid "QwenCloud"
+msgstr "QwenCloud"
+
+msgid "QwenCloud Cookie:"
+msgstr "Cookie QwenCloud :"
+
+msgid "Refresh now"
+msgstr "Actualiser"
+
+msgid "Show Anthropic"
+msgstr "Afficher Anthropic"
+
+msgid "Show DeepSeek"
+msgstr "Afficher DeepSeek"
+
+msgid "Show OpenAI"
+msgstr "Afficher OpenAI"
+
+msgid "Show OpenCode Go"
+msgstr "Afficher OpenCode Go"
+
+msgid "Show QwenCloud"
+msgstr "Afficher QwenCloud"
+
+msgid "Spent this month"
+msgstr "Dépensé ce mois-ci"
+
+msgid "Style:"
+msgstr "Style :"
+
+msgid "Target quota ($):"
+msgstr "Quota cible ($):"
+
+msgid "Three in a row"
+msgstr "Trois en ligne"
+
+msgid "Track color"
+msgstr "Couleur de la piste"
+
+msgid "Track color:"
+msgstr "Couleur de la piste :"
+
+msgid "Valid key · %1 models"
+msgstr "Clé valide · %1 modèles"
+
+msgid "Value color"
+msgstr "Couleur de la valeur"
+
+msgid "Value color:"
+msgstr "Couleur de la valeur :"
+
+msgid "Weekly"
+msgstr "Hebdomadaire"
+
+msgid "Weekly · used %1% · reset %2"
+msgstr "Hebdomadaire · utilisé %1 % · reset %2"
+
+msgid "Window 5h · used %1% · reset %2"
+msgstr "Fenêtre 5h · utilisé %1 % · reset %2"
+
+msgid "of $%1"
+msgstr "sur $%1"
+
+msgid "quota %1"
+msgstr "quota %1"
+
+msgid "reset %1"
+msgstr "réinitialisation %1"
+
+msgid "reset %1d"
+msgstr "reset %1 j"
+
+msgid "⭐ Give me a star on GitHub"
+msgstr "⭐ Donnez-moi une étoile sur GitHub"
+
+msgid "%1 h ago"
+msgid_plural "%1 h ago"
+msgstr[0] "il y a %1 heure"
+msgstr[1] "il y a %1 heures"
+
+msgid "%1 min ago"
+msgid_plural "%1 min ago"
+msgstr[0] "il y a %1 minute"
+msgstr[1] "il y a %1 minutes"
+
+msgid "%1d %2h"
+msgid_plural "%1d %2h"
+msgstr[0] "%1d %2h"
+msgstr[1] "%1d %2h"
+
+msgid "%1h %2m"
+msgid_plural "%1h %2m"
+msgstr[0] "%1h %2m"
+msgstr[1] "%1h %2m"
+
+msgid "%1m"
+msgid_plural "%1m"
+msgstr[0] "%1m"
+msgstr[1] "%1m"

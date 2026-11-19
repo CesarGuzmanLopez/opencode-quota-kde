@@ -1,42 +1,38 @@
-# IA Quota
+# OpenCode Quota
 
-Desktop widget for KDE Plasma 6 showing your AI quotas.
+Quota widget for KDE Plasma 6, built around **OpenCode Go** (5-hour, weekly and
+monthly windows). It also reads QwenCloud, DeepSeek, OpenAI and Anthropic, so it
+works as a general AI-quota monitor.
 
 ![Widget](widget.png)
 
-Shows OpenCode Go (5h, weekly, monthly), QwenCloud, DeepSeek
-(balance over a configurable target), OpenAI and Anthropic,
-as bars or circles, with automatic refresh.
+Bars or circles, responsive layout, theme-aware background, 5 languages.
 
 ## Install
 
 ```bash
-kpackagetool6 -i .
-cp icon.svg ~/.local/share/icons/hicolor/scalable/apps/org.cesar.iaquota.svg
-kbuildsycoca6
+kpackagetool6 -t Plasma/Applet -i org.cesar.iaquota.plasmoid
 ```
 
-Then right-click the desktop → _Add to panel_ → **IA Quota**.
+Right-click the desktop → *Add to panel* → **IA Quota**.
 
 ## Setup
 
-Right-click the widget → _Configure widget_ and paste your keys:
+Right-click the widget → *Configure widget* and paste your keys:
 
 ![Settings](configuraciones.png)
 
 - **OpenCode Go / DeepSeek / OpenAI / Anthropic**: your API key.
 - **QwenCloud**: your session cookie. In Firefox, open
-  `home.qwencloud.com`, press F12 → _Network_ tab, reload,
-  pick the main request → _Headers_ → right-click
-  `Cookie` → _Copy value_ and paste it in the field.
+  `home.qwencloud.com`, press F12 → *Network*, reload, pick the main request →
+  *Headers* → right-click `Cookie` → *Copy value*, then paste it.
 
 ![Where to copy the cookie](cookieQwenCloud.png)
 
-Without credentials the widget just asks you to configure them.
-The background follows the standard Plasma toggle (edit mode),
-and the text adapts on its own.
+Without credentials the widget just asks you to configure them. The background
+follows the standard Plasma toggle (edit mode) and text contrast adapts itself.
 
-_Versión en español: [README.es.md](README.es.md)_
+*Spanish version: [README.es.md](README.es.md)*
 
 ## Author
 

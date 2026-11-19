@@ -3,12 +3,12 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 
-// Raíz ColumnLayout: en modo barra muestra una fila (etiquetas + barra),
-// en modo círculo muestra una columna centrada (círculo + reset debajo).
+// Una métrica: barra o dona, con su texto de reset.
+// En modo barra: etiqueta + reset a la izquierda, barra a la derecha.
+// En modo círculo: dona centrada con etiqueta y % dentro, reset debajo.
 ColumnLayout {
     id: metric
 
-    // Configurable desde main.qml
     property string lbl: ""
     property real pct: 0
     property string rst: ""
@@ -19,15 +19,23 @@ ColumnLayout {
     property bool flat: false
     // Más grande en modo barra cuando el widget es ancho (lo pasa main.qml)
     property bool big: false
+    // Semántica del valor: true = pct es lo LIBRE, false = pct es lo USADO
+    property bool remaining: false
+    // Dato envejecido (el backend no respondió): se atenúa en vez de ocultar
+    property bool stale: false
     // Colores configurables (los pasa main.qml desde la configuración)
     property color colorValue: "#E93DAE"
     property color colorTrack: "#3DAEE9"
     readonly property color fgMain: flat ? "white" : Kirigami.Theme.textColor
     readonly property color fgSub: flat ? "#f5f5f5" : Kirigami.Theme.disabledTextColor
+    // Salud semántica: qué tan libre está la cuota (0..1), con colores del tema.
+    readonly property real freeFrac: Math.min(1, Math.max(0, remaining ? pct / 100 : 1 - pct / 100))
+    readonly property color healthColor: freeFrac <= 0.1 ? Kirigami.Theme.negativeTextColor : (freeFrac <= 0.3 ? Kirigami.Theme.neutralTextColor : Kirigami.Theme.positiveTextColor)
 
+    opacity: stale ? 0.6 : 1
     spacing: Kirigami.Units.smallSpacing / 2
 
-    // ---------- Modo barra: fila con etiquetas a la izq. y barra a la der. ----------
+    // ---------- Modo barra ----------
     RowLayout {
         visible: !metric.circle
         Layout.fillWidth: true
@@ -41,7 +49,7 @@ ColumnLayout {
                 text: metric.lbl + ": " + Math.round(metric.pct) + "%"
                 font.pixelSize: metric.big ? Kirigami.Theme.defaultFont.pixelSize + 3 : Kirigami.Theme.defaultFont.pixelSize
                 font.bold: true
-                color: metric.fgMain
+                color: metric.healthColor
                 style: metric.flat ? Text.Outline : Text.Normal
                 styleColor: "#d0000000"
                 elide: Text.ElideRight
@@ -70,7 +78,7 @@ ColumnLayout {
             height: metric.big ? 14 : 10
             radius: height / 2
             clip: true
-            color: Qt.rgba(metric.colorTrack.r, metric.colorTrack.g, metric.colorTrack.b, 0.3)
+            color: Qt.rgba(metric.colorTrack.r, metric.colorTrack.g, metric.colorTrack.b, 0.35)
 
             Rectangle {
                 width: parent.width * Math.min(1, Math.max(0, metric.pct / 100))
@@ -83,7 +91,7 @@ ColumnLayout {
 
     }
 
-    // ---------- Modo círculo: columna centrada ----------
+    // ---------- Modo círculo ----------
     ColumnLayout {
         visible: metric.circle
         spacing: Kirigami.Units.smallSpacing / 2
@@ -150,7 +158,7 @@ ColumnLayout {
                     text: Math.round(metric.pct) + "%"
                     font.pixelSize: Math.max(9, Math.round(metric.diameter / 4))
                     font.bold: true
-                    color: metric.fgMain
+                    color: metric.healthColor
                     style: metric.flat ? Text.Outline : Text.Normal
                     styleColor: "#d0000000"
                 }

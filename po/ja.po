@@ -1,0 +1,215 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: org.cesar.iaquota 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+msgid "   · 5h window"
+msgstr "   · 5時間ウィンドウ"
+
+msgid "   · Monthly"
+msgstr "   · 月間"
+
+msgid "   · Weekly"
+msgstr "   · 週間"
+
+msgid "%1 left"
+msgstr "残り %1"
+
+msgid "%1d"
+msgstr "%1日"
+
+msgid "5h"
+msgstr "5時間"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Anthropic API Key:"
+msgstr "Anthropic APIキー："
+
+msgid "Appearance"
+msgstr "外観"
+
+msgid "Auto-detected if left empty"
+msgstr "空の場合は自動検出"
+
+msgid "Automatic"
+msgstr "自動"
+
+msgid "Available"
+msgstr "利用可能"
+
+msgid "Balance"
+msgstr "残高"
+
+msgid "Balance $%1 of $%2 · used $%3"
+msgstr "残高 $%1 / $%2 · 使用 $%3"
+
+msgid "Balance %1 · target $%2 · %3"
+msgstr "残高 %1 · 目標 $%2 · %3"
+
+msgid "Bars"
+msgstr "バー"
+
+msgid "Base circle size:"
+msgstr "基準サークルサイズ："
+
+msgid "Circles"
+msgstr "サークル"
+
+msgid "Configure your credentials to see the quota"
+msgstr "クレデンシャルを設定してクォータを表示"
+
+msgid "Data from %1"
+msgstr "データ: %1"
+
+msgid "DeepSeek"
+msgstr "DeepSeek"
+
+msgid "DeepSeek API Key:"
+msgstr "DeepSeek APIキー："
+
+msgid "Error reading data"
+msgstr "データ読み取りエラー"
+
+msgid "Expires: %1 · Reset: %2"
+msgstr "有効期限：%1 · リセット：%2"
+
+msgid "Free"
+msgstr "空き"
+
+msgid "Free %1% · quota %2 · expires %3"
+msgstr "空き %1% · クォータ %2 · 期限 %3"
+
+msgid "Layout:"
+msgstr "レイアウト："
+
+msgid "Monthly"
+msgstr "月間"
+
+msgid "Monthly · used %1% · reset %2"
+msgstr "月間 · 使用 %1% · リセット %2"
+
+msgid "No backend response"
+msgstr "バックエンド応答なし"
+
+msgid "Not available"
+msgstr "利用不可"
+
+msgid "OpenAI"
+msgstr "OpenAI"
+
+msgid "OpenAI API Key:"
+msgstr "OpenAI APIキー："
+
+msgid "OpenCode Go"
+msgstr "OpenCode Go"
+
+msgid "OpenCode Go API Key:"
+msgstr "OpenCode Go APIキー："
+
+msgid "OpenCode on the left"
+msgstr "OpenCodeを左に"
+
+msgid "Quota not public"
+msgstr "クォータ非公開"
+
+msgid "Qwen sec_token:"
+msgstr "Qwen sec_token："
+
+msgid "QwenCloud"
+msgstr "QwenCloud"
+
+msgid "QwenCloud Cookie:"
+msgstr "QwenCloud Cookie："
+
+msgid "Refresh now"
+msgstr "今すぐ更新"
+
+msgid "Show Anthropic"
+msgstr "Anthropicを表示"
+
+msgid "Show DeepSeek"
+msgstr "DeepSeekを表示"
+
+msgid "Show OpenAI"
+msgstr "OpenAIを表示"
+
+msgid "Show OpenCode Go"
+msgstr "OpenCode Goを表示"
+
+msgid "Show QwenCloud"
+msgstr "QwenCloudを表示"
+
+msgid "Spent this month"
+msgstr "今月の支出"
+
+msgid "Style:"
+msgstr "スタイル："
+
+msgid "Target quota ($):"
+msgstr "目標クォータ（$）："
+
+msgid "Three in a row"
+msgstr "3つ横並び"
+
+msgid "Track color"
+msgstr "トラックの色"
+
+msgid "Track color:"
+msgstr "トラックの色："
+
+msgid "Valid key · %1 models"
+msgstr "有効なキー · %1 モデル"
+
+msgid "Value color"
+msgstr "値の色"
+
+msgid "Value color:"
+msgstr "値の色："
+
+msgid "Weekly"
+msgstr "週間"
+
+msgid "Weekly · used %1% · reset %2"
+msgstr "週間 · 使用 %1% · リセット %2"
+
+msgid "Window 5h · used %1% · reset %2"
+msgstr "5時間ウィンドウ · 使用 %1% · リセット %2"
+
+msgid "of $%1"
+msgstr "$%1のうち"
+
+msgid "quota %1"
+msgstr "クォータ %1"
+
+msgid "reset %1"
+msgstr "リセット %1"
+
+msgid "reset %1d"
+msgstr "%1日後にリセット"
+
+msgid "⭐ Give me a star on GitHub"
+msgstr "⭐ GitHubでスターをください"
+
+msgid "%1 h ago"
+msgid_plural "%1 h ago"
+msgstr[0] "%1時間前"
+
+msgid "%1 min ago"
+msgid_plural "%1 min ago"
+msgstr[0] "%1分前"
+
+msgid "%1d %2h"
+msgid_plural "%1d %2h"
+msgstr[0] "%1d %2h"
+
+msgid "%1h %2m"
+msgid_plural "%1h %2m"
+msgstr[0] "%1h %2m"
+
+msgid "%1m"
+msgid_plural "%1m"
+msgstr[0] "%1m"

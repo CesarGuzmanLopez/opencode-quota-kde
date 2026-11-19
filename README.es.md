@@ -1,42 +1,38 @@
-# IA Quota
+# OpenCode Quota
 
-Widget para KDE Plasma 6 que muestra tus cuotas de IA en el escritorio.
+Widget de cuotas para KDE Plasma 6, centrado en **OpenCode Go** (ventanas de 5 h,
+semanal y mensual). También lee QwenCloud, DeepSeek, OpenAI y Anthropic, así que
+sirve como monitor general de cuotas de IA.
 
 ![Widget](widget.png)
 
-Muestra OpenCode Go (5h, semanal, mensual), QwenCloud, DeepSeek
-(balance sobre cuota configurable), OpenAI y Anthropic,
-en barras o círculos, con actualización automática.
+Barras o círculos, diseño adaptable, fondo según el tema y 5 idiomas.
 
 ## Instalación
 
 ```bash
-kpackagetool6 -i .
-cp icon.svg ~/.local/share/icons/hicolor/scalable/apps/org.cesar.iaquota.svg
-kbuildsycoca6
+kpackagetool6 -t Plasma/Applet -i org.cesar.iaquota.plasmoid
 ```
 
-Luego clic derecho en el escritorio → _Añadir al panel_ → **IA Quota**.
+Clic derecho en el escritorio → *Añadir al panel* → **IA Quota**.
 
 ## Configuración
 
-Clic derecho en el widget → _Configurar widget_ y pega tus claves:
+Clic derecho en el widget → *Configurar widget* y pega tus claves:
 
 ![Configuración](configuraciones.png)
 
 - **OpenCode Go / DeepSeek / OpenAI / Anthropic**: su API key.
-- **QwenCloud**: la cookie de sesión. En Firefox, abre
-  `home.qwencloud.com`, pulsa F12 → pestaña _Red_, recarga,
-  elige la petición principal → _Cabeceras_ → clic derecho en
-  `Cookie` → _Copiar valor_ y pégalo en el campo.
+- **QwenCloud**: la cookie de sesión. En Firefox abre `home.qwencloud.com`,
+  pulsa F12 → *Red*, recarga, elige la petición principal → *Cabeceras* →
+  clic derecho en `Cookie` → *Copiar valor* y pégala.
 
 ![Dónde copiar la cookie](cookieQwenCloud.png)
 
-Sin credenciales el widget solo pide configurarlas.
-El fondo se oculta/muestra desde el modo de edición
-(estándar de Plasma), y el texto se adapta solo.
+Sin credenciales el widget solo pide configurarlas. El fondo sigue el toggle
+estándar de Plasma (modo edición) y el contraste del texto se adapta solo.
 
-_English version: [README.md](README.md)_
+*Versión en inglés: [README.md](README.md)*
 
 ## Autor
 

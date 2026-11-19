@@ -8,19 +8,25 @@
       }
     ],
     "Category": "System",
-    "Description": "AI cloud quotas: OpenCode Go, QwenCloud, DeepSeek, OpenAI and Anthropic",
-    "Description[es]": "Cuotas de IA en la nube: OpenCode Go, QwenCloud, DeepSeek, OpenAI y Anthropic",
+    "Description": "OpenCode Go quota monitor for KDE Plasma 6 (also QwenCloud, DeepSeek, OpenAI and Anthropic)",
+    "Description[es]": "Cuotas de OpenCode Go para KDE Plasma 6 (también QwenCloud, DeepSeek, OpenAI y Anthropic)",
     "EnabledByDefault": true,
-    "FormFactors": ["tablet", "handset", "desktop"],
+    "FormFactors": [
+      "tablet",
+      "handset",
+      "desktop"
+    ],
     "Icon": "org.cesar.iaquota",
     "Id": "org.cesar.iaquota",
     "License": "GPL-2.0+",
     "Name": "IA Quota",
     "Name[es]": "IA Quota",
     "Version": "1.0",
-    "Website": "https://github.com/CesarGuzmanLopez/ia-quota-widget",
-    "BugReportUrl": "https://github.com/CesarGuzmanLopez/ia-quota-widget/issues"
+    "Website": "https://github.com/CesarGuzmanLopez/opencode-quota-kde",
+    "BugReportUrl": "https://github.com/CesarGuzmanLopez/opencode-quota-kde/issues"
   },
   "X-Plasma-API-Minimum-Version": "6.0",
-  "X-Plasma-Provides": ["org.kde.plasma.systemmonitor"]
+  "X-Plasma-Provides": [
+    "org.kde.plasma.systemmonitor"
+  ]
 }
