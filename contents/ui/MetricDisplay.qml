@@ -53,7 +53,8 @@ ColumnLayout {
                 text: metric.rst
                 font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                 font.bold: true
-                color: metric.fgSub
+                color: metric.fgMain
+                opacity: 0.8
                 style: metric.flat ? Text.Outline : Text.Normal
                 styleColor: "#d0000000"
                 elide: Text.ElideRight
@@ -182,7 +183,8 @@ ColumnLayout {
             text: metric.rst
             font.pixelSize: Kirigami.Theme.smallFont.pixelSize
             font.bold: true
-            color: metric.fgSub
+            color: metric.fgMain
+            opacity: 0.8
             style: metric.flat ? Text.Outline : Text.Normal
             styleColor: "#d0000000"
             Layout.alignment: Qt.AlignHCenter

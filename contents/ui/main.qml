@@ -74,6 +74,21 @@ PlasmoidItem {
         return i18np("%1m", "%1m", m);
     }
 
+    // Días restantes (para el título, en la misma línea: no alarga el widget)
+    function daysFromSec(sec) {
+        if (typeof sec !== "number" || !isFinite(sec) || sec <= 0) return ""
+        return Math.ceil(sec / 86400)
+    }
+    function daysFromDate(text) {
+        if (!text) return ""
+        var t = Date.parse(String(text).replace(" ", "T"))
+        if (isNaN(t)) return ""
+        var d = Math.ceil((t - Date.now()) / 86400000)
+        return d > 0 ? d : ""
+    }
+    function headerSuffix(days) {
+        return days ? " · " + i18n("%1d", days) : ""
+    }
     function esc(s) {
         return String(s || "").replace(/'/g, "'\\''");
     }
@@ -186,7 +201,7 @@ PlasmoidItem {
                     Layout.rowSpan: root.lateral ? 2 : 1
 
                     PlasmaComponents3.Label {
-                        text: i18n("OpenCode Go")
+                        text: i18n("OpenCode Go") + root.headerSuffix(root.daysFromSec(root.oc.monthly ? root.oc.monthly.reset_in_sec : 0))
                         font.bold: true
                         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
                         color: root.colMain
@@ -261,7 +276,7 @@ PlasmoidItem {
                     Layout.alignment: Qt.AlignTop
 
                     PlasmaComponents3.Label {
-                        text: i18n("QwenCloud") + (root.qw.plan ? " · " + root.qw.plan : "")
+                        text: i18n("QwenCloud") + (root.qw.plan ? " · " + root.qw.plan : "") + root.headerSuffix(root.daysFromDate(root.qw.reset))
                         font.bold: true
                         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
                         color: root.colMain
