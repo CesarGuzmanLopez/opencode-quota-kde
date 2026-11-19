@@ -1,14 +1,14 @@
 # IA Quota
 
-Widget para KDE Plasma 6 que muestra tus cuotas de IA en el escritorio.
+Desktop widget for KDE Plasma 6 showing your AI quotas.
 
 ![Widget](widget.png)
 
-Muestra OpenCode Go (5h, semanal, mensual), QwenCloud, DeepSeek
-(balance sobre cuota configurable), OpenAI y Anthropic,
-en barras o círculos, con actualización automática.
+Shows OpenCode Go (5h, weekly, monthly), QwenCloud, DeepSeek
+(balance over a configurable target), OpenAI and Anthropic,
+as bars or circles, with automatic refresh.
 
-## Instalación
+## Install
 
 ```bash
 kpackagetool6 -i .
@@ -16,26 +16,28 @@ cp icon.svg ~/.local/share/icons/hicolor/scalable/apps/org.cesar.iaquota.svg
 kbuildsycoca6
 ```
 
-Luego clic derecho en el escritorio → *Añadir al panel* → **IA Quota**.
+Then right-click the desktop → *Add to panel* → **IA Quota**.
 
-## Configuración
+## Setup
 
-Clic derecho en el widget → *Configurar widget* y pega tus claves:
+Right-click the widget → *Configure widget* and paste your keys:
 
-![Configuración](configuraciones.png)
+![Settings](configuraciones.png)
 
-- **OpenCode Go / DeepSeek / OpenAI / Anthropic**: su API key.
-- **QwenCloud**: la cookie de sesión. En Firefox, abre
-  `home.qwencloud.com`, pulsa F12 → pestaña *Red*, recarga,
-  elige la petición principal → *Cabeceras* → clic derecho en
-  `Cookie` → *Copiar valor* y pégalo en el campo.
+- **OpenCode Go / DeepSeek / OpenAI / Anthropic**: your API key.
+- **QwenCloud**: your session cookie. In Firefox, open
+  `home.qwencloud.com`, press F12 → *Network* tab, reload,
+  pick the main request → *Headers* → right-click
+  `Cookie` → *Copy value* and paste it in the field.
 
-![Dónde copiar la cookie](cookieQwenCloud.png)
+![Where to copy the cookie](cookieQwenCloud.png)
 
-Sin credenciales el widget solo pide configurarlas.
-El fondo se oculta/muestra desde el modo de edición
-(estándar de Plasma), y el texto se adapta solo.
+Without credentials the widget just asks you to configure them.
+The background follows the standard Plasma toggle (edit mode),
+and the text adapts on its own.
 
-## Autor
+*Versión en español: [README.es.md](README.es.md)*
+
+## Author
 
 Cesar Guzman — GPL-2.0+
