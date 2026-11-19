@@ -37,6 +37,12 @@ PlasmoidItem {
     readonly property bool showDeepseek: plasmoid.configuration.showDeepseek !== false
     readonly property bool showOpenai: plasmoid.configuration.showOpenai !== false
     readonly property bool showAnthropic: plasmoid.configuration.showAnthropic !== false
+    // Acceso seguro (objeto vacío cuando el proveedor es null: evita TypeError)
+    readonly property var oai: (quotaData && quotaData.openai) ? quotaData.openai : ({})
+    readonly property var ant: (quotaData && quotaData.anthropic) ? quotaData.anthropic : ({})
+    readonly property var oc: (quotaData && quotaData.opencode) ? quotaData.opencode : ({})
+    readonly property var qw: (quotaData && quotaData.qwen) ? quotaData.qwen : ({})
+    readonly property var ds: (quotaData && quotaData.deepseek) ? quotaData.deepseek : ({})
     readonly property bool showOc5h: plasmoid.configuration.showOc5h !== false
     readonly property bool showOcWeek: plasmoid.configuration.showOcWeek !== false
     readonly property bool showOcMonth: plasmoid.configuration.showOcMonth !== false
@@ -173,7 +179,7 @@ PlasmoidItem {
 
                 // ---------- OpenCode Go ----------
                 ColumnLayout {
-                    visible: root.showOpencode && root.quotaData && root.quotaData.opencode && !root.quotaData.opencode.error
+                    visible: root.showOpencode && root.quotaData && root.quotaData.opencode && !root.oc.error
                     spacing: Kirigami.Units.smallSpacing
                     Layout.fillWidth: true
                     Layout.columnSpan: root.ocSpan
@@ -198,11 +204,11 @@ PlasmoidItem {
                         Layout.alignment: Qt.AlignHCenter
 
                         MetricDisplay {
-                            visible: root.showOc5h && !!root.quotaData.opencode.rolling
+                            visible: root.showOc5h && !!root.oc.rolling
                             flat: root.flat
                             lbl: i18n("5h")
-                            pct: (root.quotaData.opencode.rolling && root.quotaData.opencode.rolling.percent) || 0
-                            rst: i18n("reset %1", resetStr(root.quotaData.opencode.rolling ? root.quotaData.opencode.rolling.reset_in_sec : 0))
+                            pct: (root.oc.rolling && root.oc.rolling.percent) || 0
+                            rst: i18n("reset %1", resetStr(root.oc.rolling ? root.oc.rolling.reset_in_sec : 0))
                             circle: root.circleMode
                             colorValue: root.circleColor
                             colorTrack: root.trackColor
@@ -211,11 +217,11 @@ PlasmoidItem {
                         }
 
                         MetricDisplay {
-                            visible: root.showOcWeek && !!root.quotaData.opencode.weekly
+                            visible: root.showOcWeek && !!root.oc.weekly
                             flat: root.flat
                             lbl: i18n("Weekly")
-                            pct: (root.quotaData.opencode.weekly && root.quotaData.opencode.weekly.percent) || 0
-                            rst: i18n("reset %1", resetStr(root.quotaData.opencode.weekly ? root.quotaData.opencode.weekly.reset_in_sec : 0))
+                            pct: (root.oc.weekly && root.oc.weekly.percent) || 0
+                            rst: i18n("reset %1", resetStr(root.oc.weekly ? root.oc.weekly.reset_in_sec : 0))
                             circle: root.circleMode
                             colorValue: root.circleColor
                             colorTrack: root.trackColor
@@ -224,11 +230,11 @@ PlasmoidItem {
                         }
 
                         MetricDisplay {
-                            visible: root.showOcMonth && !!root.quotaData.opencode.monthly
+                            visible: root.showOcMonth && !!root.oc.monthly
                             flat: root.flat
                             lbl: i18n("Monthly")
-                            pct: (root.quotaData.opencode.monthly && root.quotaData.opencode.monthly.percent) || 0
-                            rst: i18n("reset %1", resetStr(root.quotaData.opencode.monthly ? root.quotaData.opencode.monthly.reset_in_sec : 0))
+                            pct: (root.oc.monthly && root.oc.monthly.percent) || 0
+                            rst: i18n("reset %1", resetStr(root.oc.monthly ? root.oc.monthly.reset_in_sec : 0))
                             circle: root.circleMode
                             colorValue: root.circleColor
                             colorTrack: root.trackColor
@@ -242,20 +248,20 @@ PlasmoidItem {
 
                 // Separador (solo apilado o OC-arriba; en lateral y 3-col estorba)
                 Kirigami.Separator {
-                    visible: !root.lateral && root.effCols !== 3 && root.quotaData && ((root.showOpencode && root.quotaData.opencode && !root.quotaData.opencode.error) || (root.showQwen && root.quotaData.qwen && !root.quotaData.qwen.error))
+                    visible: !root.lateral && root.effCols !== 3 && root.quotaData && ((root.showOpencode && root.quotaData.opencode && !root.oc.error) || (root.showQwen && root.quotaData.qwen && !root.qw.error))
                     Layout.fillWidth: true
                     Layout.columnSpan: root.effCols
                 }
 
                 // ---------- QwenCloud ----------
                 ColumnLayout {
-                    visible: root.showQwen && root.quotaData && root.quotaData.qwen && !root.quotaData.qwen.error
+                    visible: root.showQwen && root.quotaData && root.quotaData.qwen && !root.qw.error
                     spacing: Kirigami.Units.smallSpacing
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
                     PlasmaComponents3.Label {
-                        text: i18n("QwenCloud") + (root.quotaData.qwen.plan ? " · " + root.quotaData.qwen.plan : "")
+                        text: i18n("QwenCloud") + (root.qw.plan ? " · " + root.qw.plan : "")
                         font.bold: true
                         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
                         color: root.colMain
@@ -268,8 +274,8 @@ PlasmoidItem {
                     MetricDisplay {
                         flat: root.flat
                         lbl: i18n("Free")
-                        pct: root.quotaData.qwen.remaining_pct || 0
-                        rst: i18n("quota %1", root.quotaData.qwen.plan_quota || "–")
+                        pct: root.qw.remaining_pct || 0
+                        rst: i18n("quota %1", root.qw.plan_quota || "–")
                         circle: root.circleMode
                         colorValue: root.circleColor
                         colorTrack: root.trackColor
@@ -279,7 +285,7 @@ PlasmoidItem {
                     }
 
                     PlasmaComponents3.Label {
-                        text: i18n("Expires: %1 · Reset: %2", root.quotaData.qwen.expiry || "–", root.quotaData.qwen.reset || "–")
+                        text: i18n("Expires: %1 · Reset: %2", root.qw.expiry || "–", root.qw.reset || "–")
                         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         font.bold: true
                         color: root.colSub
@@ -294,13 +300,13 @@ PlasmoidItem {
 
                 // ---------- DeepSeek ----------
                 ColumnLayout {
-                    visible: root.showDeepseek && root.quotaData && root.quotaData.deepseek && !root.quotaData.deepseek.error
+                    visible: root.showDeepseek && root.quotaData && root.quotaData.deepseek && !root.ds.error
                     spacing: Kirigami.Units.smallSpacing
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
                     PlasmaComponents3.Label {
-                        text: i18n("DeepSeek") + (root.quotaData.deepseek.currency ? " · " + root.quotaData.deepseek.currency : "") + (root.quotaData.deepseek.total_balance != null ? " " + root.quotaData.deepseek.total_balance : "")
+                        text: i18n("DeepSeek") + (root.ds.currency ? " · " + root.ds.currency : "") + (root.ds.total_balance != null ? " " + root.ds.total_balance : "")
                         font.bold: true
                         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
                         color: root.colMain
@@ -312,10 +318,10 @@ PlasmoidItem {
 
                     MetricDisplay {
                         flat: root.flat
-                        visible: root.quotaData.deepseek.percent !== null
+                        visible: root.ds.percent !== null
                         lbl: i18n("Balance")
-                        pct: root.quotaData.deepseek.percent || 0
-                        rst: i18n("of $%1", root.quotaData.deepseek.baseline)
+                        pct: root.ds.percent || 0
+                        rst: i18n("of $%1", root.ds.baseline)
                         circle: root.circleMode
                         colorValue: root.circleColor
                         colorTrack: root.trackColor
@@ -325,7 +331,7 @@ PlasmoidItem {
                     }
 
                     PlasmaComponents3.Label {
-                        text: root.quotaData.deepseek.is_available ? i18n("Available") : i18n("Not available")
+                        text: root.ds.is_available ? i18n("Available") : i18n("Not available")
                         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         font.bold: true
                         color: root.colSub
@@ -339,13 +345,13 @@ PlasmoidItem {
 
                 // ---------- OpenAI ----------
                 ColumnLayout {
-                    visible: root.showOpenai && root.quotaData && root.quotaData.openai && !root.quotaData.openai.error
+                    visible: root.showOpenai && root.quotaData && root.quotaData.openai && !root.oai.error
                     spacing: Kirigami.Units.smallSpacing
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
                     PlasmaComponents3.Label {
-                        text: i18n("OpenAI") + (root.quotaData.openai.total_available != null ? " · $" + root.quotaData.openai.total_available : "")
+                        text: i18n("OpenAI") + (root.oai.total_available != null ? " · $" + root.oai.total_available : "")
                         font.bold: true
                         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
                         color: root.colMain
@@ -357,10 +363,10 @@ PlasmoidItem {
 
                     MetricDisplay {
                         flat: root.flat
-                        visible: root.quotaData.openai.percent !== null && root.quotaData.openai.percent !== undefined
+                        visible: root.oai.percent !== null && root.oai.percent !== undefined
                         lbl: i18n("Balance")
-                        pct: root.quotaData.openai.percent || 0
-                        rst: i18n("of $%1", root.quotaData.openai.baseline)
+                        pct: root.oai.percent || 0
+                        rst: i18n("of $%1", root.oai.baseline)
                         circle: root.circleMode
                         colorValue: root.circleColor
                         colorTrack: root.trackColor
@@ -370,8 +376,8 @@ PlasmoidItem {
                     }
 
                     PlasmaComponents3.Label {
-                        visible: root.quotaData.openai.percent == null && !!root.quotaData.openai.key_valid
-                        text: i18n("Valid key · %1 models", root.quotaData.openai.model_count || 0)
+                        visible: root.oai.percent == null && !!root.oai.key_valid
+                        text: i18n("Valid key · %1 models", root.oai.model_count || 0)
                         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         font.bold: true
                         color: root.colMain
@@ -382,7 +388,7 @@ PlasmoidItem {
                     }
 
                     PlasmaComponents3.Label {
-                        visible: root.quotaData.openai.percent == null && !!root.quotaData.openai.key_valid
+                        visible: root.oai.percent == null && !!root.oai.key_valid
                         text: i18n("Quota not public")
                         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         font.bold: true
@@ -397,13 +403,13 @@ PlasmoidItem {
 
                 // ---------- Anthropic ----------
                 ColumnLayout {
-                    visible: root.showAnthropic && root.quotaData && root.quotaData.anthropic && !root.quotaData.anthropic.error
+                    visible: root.showAnthropic && root.quotaData && root.quotaData.anthropic && !root.ant.error
                     spacing: Kirigami.Units.smallSpacing
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
                     PlasmaComponents3.Label {
-                        text: i18n("Anthropic") + (root.quotaData.anthropic.spent_month != null ? " · " + (root.quotaData.anthropic.currency || "") + " " + root.quotaData.anthropic.spent_month : "")
+                        text: i18n("Anthropic") + (root.ant.spent_month != null ? " · " + (root.ant.currency || "") + " " + root.ant.spent_month : "")
                         font.bold: true
                         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize + 3
                         color: root.colMain
@@ -414,7 +420,7 @@ PlasmoidItem {
                     }
 
                     PlasmaComponents3.Label {
-                        visible: root.quotaData.anthropic.spent_month != null
+                        visible: root.ant.spent_month != null
                         text: i18n("Spent this month")
                         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         font.bold: true
@@ -426,8 +432,8 @@ PlasmoidItem {
                     }
 
                     PlasmaComponents3.Label {
-                        visible: root.quotaData.anthropic.spent_month == null && !!root.quotaData.anthropic.key_valid
-                        text: i18n("Valid key · %1 models", root.quotaData.anthropic.model_count || 0)
+                        visible: root.ant.spent_month == null && !!root.ant.key_valid
+                        text: i18n("Valid key · %1 models", root.ant.model_count || 0)
                         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
                         font.bold: true
                         color: root.colMain
@@ -438,7 +444,7 @@ PlasmoidItem {
                     }
 
                     PlasmaComponents3.Label {
-                        visible: root.quotaData.anthropic.spent_month == null && !!root.quotaData.anthropic.key_valid
+                        visible: root.ant.spent_month == null && !!root.ant.key_valid
                         text: i18n("Quota not public")
                         font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                         font.bold: true
@@ -455,8 +461,8 @@ PlasmoidItem {
 
             // Errores
             PlasmaComponents3.Label {
-                visible: (root.quotaData && (root.quotaData.opencode && root.quotaData.opencode.error || root.quotaData.qwen && root.quotaData.qwen.error || root.quotaData.deepseek && root.quotaData.deepseek.error || root.quotaData.openai && root.quotaData.openai.error || root.quotaData.anthropic && root.quotaData.anthropic.error)) || root.lastError !== ""
-                text: root.lastError || ((root.quotaData && root.quotaData.opencode && root.quotaData.opencode.error) || (root.quotaData && root.quotaData.qwen && root.quotaData.qwen.error) || (root.quotaData && root.quotaData.deepseek && root.quotaData.deepseek.error) || (root.quotaData && root.quotaData.openai && root.quotaData.openai.error) || (root.quotaData && root.quotaData.anthropic && root.quotaData.anthropic.error)) || ""
+                visible: (root.quotaData && (root.quotaData.opencode && root.oc.error || root.quotaData.qwen && root.qw.error || root.quotaData.deepseek && root.ds.error || root.quotaData.openai && root.oai.error || root.quotaData.anthropic && root.ant.error)) || root.lastError !== ""
+                text: root.lastError || ((root.quotaData && root.quotaData.opencode && root.oc.error) || (root.quotaData && root.quotaData.qwen && root.qw.error) || (root.quotaData && root.quotaData.deepseek && root.ds.error) || (root.quotaData && root.quotaData.openai && root.oai.error) || (root.quotaData && root.quotaData.anthropic && root.ant.error)) || ""
                 font: Kirigami.Theme.smallFont
                 color: Kirigami.Theme.negativeTextColor
                 style: root.flat ? Text.Outline : Text.Normal

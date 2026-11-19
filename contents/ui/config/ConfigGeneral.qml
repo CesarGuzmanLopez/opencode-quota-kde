@@ -178,16 +178,6 @@ KCM.SimpleKCM {
             checked: true
         }
 
-        Kirigami.Separator {
-        }
-
-        Controls.Button {
-            icon.name: "emblem-favorite"
-            text: i18n("⭐ Give me a star on GitHub")
-            Layout.fillWidth: true
-            onClicked: Qt.openUrlExternally("https://github.com/CesarGuzmanLopez/ia-quota-widget")
-        }
-
         // ----- Apariencia -----
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
@@ -235,6 +225,16 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Track color:")
             dialogTitle: i18n("Track color")
             showAlphaChannel: false
+        }
+
+        Kirigami.Separator {
+        }
+
+        Controls.Button {
+            icon.name: "emblem-favorite"
+            text: i18n("⭐ Give me a star on GitHub")
+            Layout.fillWidth: true
+            onClicked: Qt.openUrlExternally("https://github.com/CesarGuzmanLopez/ia-quota-widget")
         }
 
     }
