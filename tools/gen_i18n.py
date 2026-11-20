@@ -379,7 +379,14 @@ def main():
         with open(popath, "w", encoding="utf-8") as f:
             f.write(build(lang, nforms))
         for base in targets:
-            for dom in DOMAINS:
+            # dentro del paquete solo hace falta el dominio de la applet;
+            # el alias sin prefijo solo sirve en ~/.local/share/locale
+            doms = (
+                DOMAINS
+                if base != os.path.join(ROOT, "contents", "locale")
+                else DOMAINS[:1]
+            )
+            for dom in doms:
                 modir = os.path.join(base, locale, "LC_MESSAGES")
                 os.makedirs(modir, exist_ok=True)
                 mo = os.path.join(modir, dom + ".mo")
