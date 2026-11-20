@@ -14,12 +14,6 @@ msgstr "   · 月間"
 msgid "   · Weekly"
 msgstr "   · 週間"
 
-msgid "%1 left"
-msgstr "残り %1"
-
-msgid "%1d"
-msgstr "%1日"
-
 msgid "5h"
 msgstr "5時間"
 
@@ -40,15 +34,6 @@ msgstr "自動"
 
 msgid "Available"
 msgstr "利用可能"
-
-msgid "Balance"
-msgstr "残高"
-
-msgid "Balance $%1 of $%2 · used $%3"
-msgstr "残高 $%1 / $%2 · 使用 $%3"
-
-msgid "Balance %1 · target $%2 · %3"
-msgstr "残高 %1 · 目標 $%2 · %3"
 
 msgid "Bars"
 msgstr "バー"
@@ -77,20 +62,11 @@ msgstr "データ読み取りエラー"
 msgid "Expires: %1 · Reset: %2"
 msgstr "有効期限：%1 · リセット：%2"
 
-msgid "Free"
-msgstr "空き"
-
-msgid "Free %1% · quota %2 · expires %3"
-msgstr "空き %1% · クォータ %2 · 期限 %3"
-
 msgid "Layout:"
 msgstr "レイアウト："
 
 msgid "Monthly"
 msgstr "月間"
-
-msgid "Monthly · used %1% · reset %2"
-msgstr "月間 · 使用 %1% · リセット %2"
 
 msgid "No backend response"
 msgstr "バックエンド応答なし"
@@ -161,6 +137,9 @@ msgstr "トラックの色"
 msgid "Track color:"
 msgstr "トラックの色："
 
+msgid "Used"
+msgstr "使用済み"
+
 msgid "Valid key · %1 models"
 msgstr "有効なキー · %1 モデル"
 
@@ -172,12 +151,6 @@ msgstr "値の色："
 
 msgid "Weekly"
 msgstr "週間"
-
-msgid "Weekly · used %1% · reset %2"
-msgstr "週間 · 使用 %1% · リセット %2"
-
-msgid "Window 5h · used %1% · reset %2"
-msgstr "5時間ウィンドウ · 使用 %1% · リセット %2"
 
 msgid "of $%1"
 msgstr "$%1のうち"
@@ -191,7 +164,7 @@ msgstr "リセット %1"
 msgid "reset %1d"
 msgstr "%1日後にリセット"
 
-msgid "⭐ Give me a star on GitHub"
+msgid "⭐ Star on GitHub"
 msgstr "⭐ GitHubでスターをください"
 
 msgid "%1 h ago"

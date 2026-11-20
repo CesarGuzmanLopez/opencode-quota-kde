@@ -58,13 +58,6 @@ T = {
         "zh": "QwenCloud",
         "ja": "QwenCloud",
     },
-    "Free": {"es": "Libre", "fr": "Libre", "zh": "空闲", "ja": "空き"},
-    "quota %1": {
-        "es": "quota %1",
-        "fr": "quota %1",
-        "zh": "配额 %1",
-        "ja": "クォータ %1",
-    },
     "Expires: %1 · Reset: %2": {
         "es": "Expira: %1 · Reset: %2",
         "fr": "Expire : %1 · Réinitialisation : %2",
@@ -76,14 +69,6 @@ T = {
         "fr": "DeepSeek",
         "zh": "DeepSeek",
         "ja": "DeepSeek",
-    },
-    "Balance": {"es": "Balance", "fr": "Solde", "zh": "余额", "ja": "残高"},
-    "of $%1": {"es": "de $%1", "fr": "sur $%1", "zh": "共 $%1", "ja": "$%1のうち"},
-    "Available": {
-        "es": "Disponible",
-        "fr": "Disponible",
-        "zh": "可用",
-        "ja": "利用可能",
     },
     "Not available": {
         "es": "No disponible",
@@ -169,6 +154,25 @@ T = {
         "zh": "显示 DeepSeek",
         "ja": "DeepSeekを表示",
     },
+    "Used": {
+        "es": "Usado",
+        "fr": "Utilis\u00e9",
+        "zh": "已用",
+        "ja": "使用済み",
+    },
+    "Available": {
+        "es": "Disponible",
+        "fr": "Disponible",
+        "zh": "可用",
+        "ja": "利用可能",
+    },
+    "quota %1": {
+        "es": "cuota %1",
+        "fr": "quota %1",
+        "zh": "配额 %1",
+        "ja": "クォータ %1",
+    },
+    "of $%1": {"es": "de $%1", "fr": "sur $%1", "zh": "共 $%1", "ja": "$%1のうち"},
     "Appearance": {"es": "Apariencia", "fr": "Apparence", "zh": "外观", "ja": "外観"},
     "Style:": {"es": "Estilo:", "fr": "Style :", "zh": "样式：", "ja": "スタイル："},
     "Bars": {"es": "Barras", "fr": "Barres", "zh": "条形", "ja": "バー"},
@@ -299,65 +303,17 @@ T = {
         "zh": "%1 天后重置",
         "ja": "%1日後にリセット",
     },
-    "%1d": {
-        "es": "%1 d",
-        "fr": "%1 j",
-        "zh": "%1 天",
-        "ja": "%1日",
-    },
-    "⭐ Give me a star on GitHub": {
-        "es": "⭐ Dame una estrella en GitHub",
-        "fr": "⭐ Donnez-moi une étoile sur GitHub",
-        "zh": "⭐ 在 GitHub 上给我一颗星",
-        "ja": "⭐ GitHubでスターをください",
-    },
-    "%1 left": {
-        "es": "%1 restante",
-        "fr": "%1 restant",
-        "zh": "剩余 %1",
-        "ja": "残り %1",
-    },
-    "Balance $%1 of $%2 · used $%3": {
-        "es": "Saldo $%1 de $%2 · usado $%3",
-        "fr": "Solde $%1 sur $%2 · utilisé $%3",
-        "zh": "余额 $%1 / $%2 · 已用 $%3",
-        "ja": "残高 $%1 / $%2 · 使用 $%3",
-    },
-    "Balance %1 · target $%2 · %3": {
-        "es": "Saldo %1 · objetivo $%2 · %3",
-        "fr": "Solde %1 · objectif $%2 · %3",
-        "zh": "余额 %1 · 目标 $%2 · %3",
-        "ja": "残高 %1 · 目標 $%2 · %3",
+    "⭐ Star on GitHub": {
+        "es": "\u2b50 Dale una estrella en GitHub",
+        "fr": "\u2b50 Donnez une étoile sur GitHub",
+        "zh": "\u2b50 在 GitHub 给我一颗星",
+        "ja": "\u2b50 GitHubでスターをください",
     },
     "Data from %1": {
         "es": "Datos de hace %1",
         "fr": "Données de %1",
         "zh": "数据来自 %1",
         "ja": "データ: %1",
-    },
-    "Free %1% · quota %2 · expires %3": {
-        "es": "Libre %1% · cuota %2 · vence %3",
-        "fr": "Libre %1 % · quota %2 · expire %3",
-        "zh": "空闲 %1% · 配额 %2 · 到期 %3",
-        "ja": "空き %1% · クォータ %2 · 期限 %3",
-    },
-    "Monthly · used %1% · reset %2": {
-        "es": "Mensual · usado %1% · reset %2",
-        "fr": "Mensuel · utilisé %1 % · reset %2",
-        "zh": "每月 · 已用 %1% · 重置 %2",
-        "ja": "月間 · 使用 %1% · リセット %2",
-    },
-    "Weekly · used %1% · reset %2": {
-        "es": "Semanal · usado %1% · reset %2",
-        "fr": "Hebdomadaire · utilisé %1 % · reset %2",
-        "zh": "每周 · 已用 %1% · 重置 %2",
-        "ja": "週間 · 使用 %1% · リセット %2",
-    },
-    "Window 5h · used %1% · reset %2": {
-        "es": "Ventana 5h · usado %1% · reset %2",
-        "fr": "Fenêtre 5h · utilisé %1 % · reset %2",
-        "zh": "5小时窗口 · 已用 %1% · 重置 %2",
-        "ja": "5時間ウィンドウ · 使用 %1% · リセット %2",
     },
 }
 
@@ -437,7 +393,14 @@ def main():
                     print("MSGFMT ERROR", lang, r.stderr)
                     raise SystemExit(1)
         print("OK", lang, "->", locale)
-    print("cadenas:", len(T), "plurales:", len(PLURALS), "+", len(PLURAL_EXTRA))
+    print(
+        "cadenas:",
+        len(T),
+        "plurales:",
+        len(PLURALS),
+        "+",
+        len(PLURAL_EXTRA),
+    )
 
 
 if __name__ == "__main__":

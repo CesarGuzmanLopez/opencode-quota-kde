@@ -14,12 +14,6 @@ msgstr "   · 每月"
 msgid "   · Weekly"
 msgstr "   · 每周"
 
-msgid "%1 left"
-msgstr "剩余 %1"
-
-msgid "%1d"
-msgstr "%1 天"
-
 msgid "5h"
 msgstr "5小时"
 
@@ -40,15 +34,6 @@ msgstr "自动"
 
 msgid "Available"
 msgstr "可用"
-
-msgid "Balance"
-msgstr "余额"
-
-msgid "Balance $%1 of $%2 · used $%3"
-msgstr "余额 $%1 / $%2 · 已用 $%3"
-
-msgid "Balance %1 · target $%2 · %3"
-msgstr "余额 %1 · 目标 $%2 · %3"
 
 msgid "Bars"
 msgstr "条形"
@@ -77,20 +62,11 @@ msgstr "读取数据出错"
 msgid "Expires: %1 · Reset: %2"
 msgstr "过期：%1 · 重置：%2"
 
-msgid "Free"
-msgstr "空闲"
-
-msgid "Free %1% · quota %2 · expires %3"
-msgstr "空闲 %1% · 配额 %2 · 到期 %3"
-
 msgid "Layout:"
 msgstr "布局："
 
 msgid "Monthly"
 msgstr "每月"
-
-msgid "Monthly · used %1% · reset %2"
-msgstr "每月 · 已用 %1% · 重置 %2"
 
 msgid "No backend response"
 msgstr "后端无响应"
@@ -161,6 +137,9 @@ msgstr "轨道颜色"
 msgid "Track color:"
 msgstr "轨道颜色："
 
+msgid "Used"
+msgstr "已用"
+
 msgid "Valid key · %1 models"
 msgstr "有效密钥 · %1 个模型"
 
@@ -172,12 +151,6 @@ msgstr "数值颜色："
 
 msgid "Weekly"
 msgstr "每周"
-
-msgid "Weekly · used %1% · reset %2"
-msgstr "每周 · 已用 %1% · 重置 %2"
-
-msgid "Window 5h · used %1% · reset %2"
-msgstr "5小时窗口 · 已用 %1% · 重置 %2"
 
 msgid "of $%1"
 msgstr "共 $%1"
@@ -191,8 +164,8 @@ msgstr "重置 %1"
 msgid "reset %1d"
 msgstr "%1 天后重置"
 
-msgid "⭐ Give me a star on GitHub"
-msgstr "⭐ 在 GitHub 上给我一颗星"
+msgid "⭐ Star on GitHub"
+msgstr "⭐ 在 GitHub 给我一颗星"
 
 msgid "%1 h ago"
 msgid_plural "%1 h ago"

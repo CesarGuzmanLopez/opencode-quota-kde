@@ -14,12 +14,6 @@ msgstr "   · Mensuel"
 msgid "   · Weekly"
 msgstr "   · Hebdomadaire"
 
-msgid "%1 left"
-msgstr "%1 restant"
-
-msgid "%1d"
-msgstr "%1 j"
-
 msgid "5h"
 msgstr "5h"
 
@@ -40,15 +34,6 @@ msgstr "Automatique"
 
 msgid "Available"
 msgstr "Disponible"
-
-msgid "Balance"
-msgstr "Solde"
-
-msgid "Balance $%1 of $%2 · used $%3"
-msgstr "Solde $%1 sur $%2 · utilisé $%3"
-
-msgid "Balance %1 · target $%2 · %3"
-msgstr "Solde %1 · objectif $%2 · %3"
 
 msgid "Bars"
 msgstr "Barres"
@@ -77,20 +62,11 @@ msgstr "Erreur de lecture des données"
 msgid "Expires: %1 · Reset: %2"
 msgstr "Expire : %1 · Réinitialisation : %2"
 
-msgid "Free"
-msgstr "Libre"
-
-msgid "Free %1% · quota %2 · expires %3"
-msgstr "Libre %1 % · quota %2 · expire %3"
-
 msgid "Layout:"
 msgstr "Disposition :"
 
 msgid "Monthly"
 msgstr "Mensuel"
-
-msgid "Monthly · used %1% · reset %2"
-msgstr "Mensuel · utilisé %1 % · reset %2"
 
 msgid "No backend response"
 msgstr "Pas de réponse du backend"
@@ -161,6 +137,9 @@ msgstr "Couleur de la piste"
 msgid "Track color:"
 msgstr "Couleur de la piste :"
 
+msgid "Used"
+msgstr "Utilisé"
+
 msgid "Valid key · %1 models"
 msgstr "Clé valide · %1 modèles"
 
@@ -172,12 +151,6 @@ msgstr "Couleur de la valeur :"
 
 msgid "Weekly"
 msgstr "Hebdomadaire"
-
-msgid "Weekly · used %1% · reset %2"
-msgstr "Hebdomadaire · utilisé %1 % · reset %2"
-
-msgid "Window 5h · used %1% · reset %2"
-msgstr "Fenêtre 5h · utilisé %1 % · reset %2"
 
 msgid "of $%1"
 msgstr "sur $%1"
@@ -191,8 +164,8 @@ msgstr "réinitialisation %1"
 msgid "reset %1d"
 msgstr "reset %1 j"
 
-msgid "⭐ Give me a star on GitHub"
-msgstr "⭐ Donnez-moi une étoile sur GitHub"
+msgid "⭐ Star on GitHub"
+msgstr "⭐ Donnez une étoile sur GitHub"
 
 msgid "%1 h ago"
 msgid_plural "%1 h ago"

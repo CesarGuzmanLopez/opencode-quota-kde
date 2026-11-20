@@ -349,10 +349,9 @@ PlasmoidItem {
 
                     MetricDisplay {
                         flat: root.flat
-                        lbl: i18n("Free")
-                        remaining: true
+                        lbl: i18n("Used")
                         stale: root.stale
-                        pct: root.qw.remaining_pct || 0
+                        pct: 100 - (root.qw.remaining_pct || 0)
                         rst: i18n("quota %1", root.qw.plan_quota || "–")
                         circle: root.circleMode
                         colorValue: root.circleColor
@@ -396,10 +395,9 @@ PlasmoidItem {
                     MetricDisplay {
                         flat: root.flat
                         visible: root.ds.percent !== null
-                        lbl: i18n("Balance")
-                        remaining: true
+                        lbl: i18n("Used")
                         stale: root.stale
-                        pct: root.ds.percent || 0
+                        pct: 100 - (root.ds.percent || 0)
                         rst: i18n("of $%1", root.ds.baseline)
                         circle: root.circleMode
                         colorValue: root.circleColor
@@ -442,10 +440,9 @@ PlasmoidItem {
                     MetricDisplay {
                         flat: root.flat
                         visible: root.oai.percent !== null && root.oai.percent !== undefined
-                        lbl: i18n("Balance")
-                        remaining: true
+                        lbl: i18n("Used")
                         stale: root.stale
-                        pct: root.oai.percent || 0
+                        pct: 100 - (root.oai.percent || 0)
                         rst: i18n("of $%1", root.oai.baseline)
                         circle: root.circleMode
                         colorValue: root.circleColor

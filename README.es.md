@@ -8,6 +8,13 @@ general.
 
 Barras o círculos, diseño adaptable, fondo según el tema y 5 idiomas.
 
+## Filosofía
+
+Mantenerlo simple. Una idea por archivo, ninguna dependencia más allá de la
+biblioteca estándar de Python, sin cuentas, sin telemetría y sin demonios en
+segundo plano. Si una función no hace que los números se lean de un vistazo,
+no va aquí.
+
 ## Instalación
 
 ```bash
