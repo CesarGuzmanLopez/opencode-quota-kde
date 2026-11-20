@@ -6,6 +6,10 @@ general.
 
 ![Widget](widget.png)
 
+Modo círculos:
+
+![Círculos](circles.png)
+
 Barras o círculos, diseño adaptable, fondo según el tema y 5 idiomas.
 
 ## Filosofía

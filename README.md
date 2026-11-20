@@ -6,6 +6,10 @@ general AI-quota monitor.
 
 ![Widget](widget.png)
 
+Circles mode:
+
+![Circles](circles.png)
+
 Bars or circles, responsive layout, theme-aware background, 5 languages.
 
 ## Philosophy
