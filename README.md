@@ -14,9 +14,7 @@ Bars or circles, responsive layout, theme-aware background, 5 languages.
 
 ## Philosophy
 
-Keep it simple. One idea per file, no dependencies beyond the Python standard
-library, no accounts, no telemetry, no background daemon. If a feature does not
-make the numbers easier to read at a glance, it does not belong here.
+Keep it simple.
 
 ## Install
 
